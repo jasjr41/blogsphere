@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogSphere - All Blogs</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --family-color: #ff6b6b;
+            --business-color: #4361ee;
+            --sales-color: #ff6b35;
+            --about-color: #6a11cb;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+        }
+
+        .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: white !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding: 20px 0;
+        }
+
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary) !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+            color: var(--dark) !important;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
+
+        .nav-link.active {
+            color: var(--primary) !important;
+            font-weight: 600;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 10px;
+        }
+
+        /* Hero Section */
+        .hero-banner {
+            background: var(--gradient);
+            color: white;
+            padding: 100px 0;
+            border-radius: 0 0 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -250px;
+            right: -150px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        /* Category Cards */
+        .category-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+            border: 3px solid transparent;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--card-color);
+        }
+
+        .category-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            color: white;
+            background: var(--card-color);
+        }
+
+        .category-count {
+            background: rgba(0,0,0,0.05);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .category-btn {
+            background: var(--card-color);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            color: white;
+        }
+
+        /* Featured Posts */
+        .featured-post {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            height: 100%;
+        }
+
+        .featured-post:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .featured-post img {
+            height: 250px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .post-content {
+            padding: 25px;
+        }
+
+        .post-category {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .post-category.family {
+            background: #ffeaea;
+            color: var(--family-color);
+        }
+
+        .post-category.business {
+            background: #e3f2fd;
+            color: var(--business-color);
+        }
+
+        .post-category.sales {
+            background: #fff0e6;
+            color: var(--sales-color);
+        }
+
+        .post-category.about {
+            background: #f0e6ff;
+            color: var(--about-color);
+        }
+
+        /* Statistics */
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        /* Newsletter */
+        .newsletter-box {
+            background: var(--gradient);
+            color: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-box::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            bottom: -150px;
+            right: -100px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .category-card {
+                padding: 30px 20px;
+            }
+
+            .newsletter-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="bi bi-pen-fill"></i>
+                <span class="brand-font">BlogSphere</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/blogs/">Blogs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blogs/about_blogs">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="hero-title">Explore All Blog Categories</h1>
+                    <p class="lead mb-4">Dive into our collection of articles across various topics. From family life to business strategies, find content that inspires and educates.</p>
+                    <a href="#categories" class="btn btn-light btn-lg px-4">
+                        <i class="bi bi-arrow-down-circle me-2"></i>Browse Categories
+                    </a>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <div class="bg-white rounded-circle p-4 d-inline-block" style="opacity: 0.9;">
+                        <i class="bi bi-book" style="font-size: 4rem; color: var(--primary);"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-5" id="categories">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold mb-3">Browse by Category</h2>
+                <p class="text-muted lead">Choose a category to explore specific content</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Family Blogs -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card" style="--card-color: var(--family-color);">
+                        <div class="category-icon">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <h3 class="mb-3">Family & Lifestyle</h3>
+                        <p class="text-muted">Heartwarming stories, parenting tips, and family adventures that bring joy to everyday life.</p>
+                        <span class="category-count">245 Articles</span>
+                        <br>
+                        <a href="/blogs/family_blogs" class="category-btn">
+                            Explore <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Business Blogs -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card" style="--card-color: var(--business-color);">
+                        <div class="category-icon">
+                            <i class="bi bi-briefcase-fill"></i>
+                        </div>
+                        <h3 class="mb-3">Business Insights</h3>
+                        <p class="text-muted">Latest trends, strategies, and success stories from the world of business and entrepreneurship.</p>
+                        <span class="category-count">189 Articles</span>
+                        <br>
+                        <a href="/blogs/business_blogs" class="category-btn">
+                            Explore <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sales Blogs -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card" style="--card-color: var(--sales-color);">
+                        <div class="category-icon">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <h3 class="mb-3">Sales & Marketing</h3>
+                        <p class="text-muted">Proven techniques, market analysis, and sales strategies to boost your performance and ROI.</p>
+                        <span class="category-count">156 Articles</span>
+                        <br>
+                        <a href="/blogs/sales_blogs" class="category-btn">
+                            Explore <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- About Blogs -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card" style="--card-color: var(--about-color);">
+                        <div class="category-icon">
+                            <i class="bi bi-info-circle-fill"></i>
+                        </div>
+                        <h3 class="mb-3">About BlogSphere</h3>
+                        <p class="text-muted">Learn about our mission, team, values, and how we're building a community around quality content.</p>
+                        <span class="category-count">About Us</span>
+                        <br>
+                        <a href="/blogs/about_blogs" class="category-btn">
+                            Learn More <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-5" style="background: #f8f9ff;">
+        <div class="container py-5">
+            <div class="row g-4">
+                <div class="col-md-3 col-6">
+                    <div class="stats-card">
+                        <i class="bi bi-journal-text display-6 mb-3" style="color: var(--primary);"></i>
+                        <span class="stats-number">1,589</span>
+                        <p class="mb-0">Total Articles</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stats-card">
+                        <i class="bi bi-people display-6 mb-3" style="color: var(--family-color);"></i>
+                        <span class="stats-number">324</span>
+                        <p class="mb-0">Expert Writers</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stats-card">
+                        <i class="bi bi-eye display-6 mb-3" style="color: var(--business-color);"></i>
+                        <span class="stats-number">89K+</span>
+                        <p class="mb-0">Monthly Readers</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stats-card">
+                        <i class="bi bi-globe display-6 mb-3" style="color: var(--sales-color);"></i>
+                        <span class="stats-number">42</span>
+                        <p class="mb-0">Countries</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Posts -->
+    <section class="py-5">
+        <div class="container py-5">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <div>
+                    <h2 class="display-6 fw-bold mb-2">🔥 Featured Articles</h2>
+                    <p class="text-muted">Handpicked articles from our top writers</p>
+                </div>
+                <a href="#" class="btn btn-outline-primary">
+                    View All <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+            </div>
+
+            <div class="row g-4">
+                <!-- Post 1 -->
+                <div class="col-md-4">
+                    <div class="featured-post">
+                        <img src="https://images.unsplash.com/photo-1516627145497-ae6955a424ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800" alt="Family Time">
+                        <div class="post-content">
+                            <span class="post-category family">Family & Lifestyle</span>
+                            <h4 class="mb-3">Creating Quality Family Time in a Busy World</h4>
+                            <p class="text-muted mb-4">Discover practical strategies to create meaningful family moments even with hectic schedules...</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://randomuser.me/api/portraits/women/45.jpg" class="rounded-circle me-2" width="35" alt="Author">
+                                    <span class="small">Sarah Johnson</span>
+                                </div>
+                                <span class="text-muted small">3 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 2 -->
+                <div class="col-md-4">
+                    <div class="featured-post">
+                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800" alt="AI Business">
+                        <div class="post-content">
+                            <span class="post-category business">Business Insights</span>
+                            <h4 class="mb-3">How AI is Reshaping Small Business Operations</h4>
+                            <p class="text-muted mb-4">Practical AI applications that small businesses can implement today to improve efficiency...</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://randomuser.me/api/portraits/women/65.jpg" class="rounded-circle me-2" width="35" alt="Author">
+                                    <span class="small">Dr. Lisa Wang</span>
+                                </div>
+                                <span class="text-muted small">5 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 3 -->
+                <div class="col-md-4">
+                    <div class="featured-post">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800" alt="Sales Strategy">
+                        <div class="post-content">
+                            <span class="post-category sales">Sales & Marketing</span>
+                            <h4 class="mb-3">Social Selling Secrets for 2024</h4>
+                            <p class="text-muted mb-4">Transform your social media presence into a sales machine using these proven strategies...</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://randomuser.me/api/portraits/men/85.jpg" class="rounded-circle me-2" width="35" alt="Author">
+                                    <span class="small">Mark Richardson</span>
+                                </div>
+                                <span class="text-muted small">1 week ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="container">
+        <div class="newsletter-box text-center">
+            <h2 class="mb-3">Never Miss an Update</h2>
+            <p class="mb-4">Subscribe to our newsletter and get the latest articles delivered to your inbox weekly.</p>
+            <form class="d-flex justify-content-center gap-3 flex-wrap">
+                <input type="email" class="form-control form-control-lg" placeholder="Enter your email" style="max-width: 400px;">
+                <button type="submit" class="btn btn-light btn-lg px-4">
+                    <i class="bi bi-envelope-check me-2"></i>Subscribe
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <a class="navbar-brand mb-3" href="/" style="color: white;">
+                        <i class="bi bi-pen-fill"></i>
+                        <span class="brand-font">BlogSphere</span>
+                    </a>
+                    <p class="text-white-50">Your gateway to diverse perspectives and valuable insights. Join our community of passionate readers and writers.</p>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5>Categories</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/app1/family_blogs/" class="text-white-50 text-decoration-none">Family & Lifestyle</a></li>
+                        <li><a href="/app1/business_blogs/" class="text-white-50 text-decoration-none">Business Insights</a></li>
+                        <li><a href="/app1/sales_blogs/" class="text-white-50 text-decoration-none">Sales & Marketing</a></li>
+                        <li><a href="/app1/about_blogs/" class="text-white-50 text-decoration-none">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/" class="text-white-50 text-decoration-none">Home</a></li>
+                        <li><a href="/blogs/" class="text-white-50 text-decoration-none">All Blogs</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Contact</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4 mb-4">
+                    <h5>Connect With Us</h5>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="#" class="text-white fs-4"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: #444;">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="text-white-50 mb-0">&copy; 2025 BlogSphere. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="text-white-50 mb-0">Made with <i class="bi bi-heart-fill text-danger"></i> using Django</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Add scroll animation to category cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.category-card');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

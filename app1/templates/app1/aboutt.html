@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - BlogSphere</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --about-primary: #6a11cb;
+            --about-secondary: #2575fc;
+            --about-accent: #ff7e5f;
+            --about-light: #f8f9ff;
+            --about-gradient: linear-gradient(135deg, var(--about-primary), var(--about-secondary));
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            background-color: var(--about-light);
+        }
+
+        .about-navbar {
+            background: white;
+            box-shadow: 0 4px 20px rgba(106, 17, 203, 0.1);
+        }
+
+        .about-hero {
+            background: var(--about-gradient);
+            color: white;
+            padding: 120px 0;
+            border-radius: 0 0 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-hero::before {
+            content: '📝';
+            position: absolute;
+            font-size: 300px;
+            opacity: 0.1;
+            bottom: -50px;
+            right: -50px;
+        }
+
+        .mission-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(106, 17, 203, 0.1);
+            text-align: center;
+            border-top: 5px solid var(--about-accent);
+            transition: transform 0.3s;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(106, 17, 203, 0.15);
+        }
+
+        .team-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 5px solid #f0f4ff;
+        }
+
+        .stat-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--about-gradient);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--about-primary);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 20px;
+            width: 2px;
+            height: calc(100% + 25px);
+            background: #ddd;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .value-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 2px solid #e8eaff;
+            transition: all 0.3s;
+        }
+
+        .value-card:hover {
+            border-color: var(--about-primary);
+            background: #f8f9ff;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg about-navbar sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/" style="color: var(--about-primary);">
+                <i class="bi bi-info-circle-fill me-2"></i>About BlogSphere
+            </a>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url ""}">All Blogs</a></li>
+                <li class="nav-item"><a class="nav-link" href="/app1/family_blogs/">Family</a></li>
+                <li class="nav-item"><a class="nav-link" href="/app1/business_blogs/">Business</a></li>
+                <li class="nav-item"><a class="nav-link" href="/app1/sales_blogs/">Sales</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#" style="color: var(--about-primary) !important;">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-3 fw-bold mb-4">Our Story & Vision</h1>
+                    <p class="lead mb-4">BlogSphere was founded on a simple belief: everyone has a story worth telling and knowledge worth sharing. We're building a platform where diverse voices converge to inspire, educate, and connect.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#mission" class="btn btn-light btn-lg px-4">
+                            <i class="bi bi-compass me-2"></i>Our Mission
+                        </a>
+                        <a href="#team" class="btn btn-outline-light btn-lg px-4">
+                            <i class="bi bi-people me-2"></i>Meet Our Team
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center mt-5 mt-lg-0">
+                    <div class="stat-circle">
+                        <h3 class="mb-0">2025</h3>
+                        <small>Founded</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="py-5" id="mission">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="mission-card">
+                        <div class="display-1 mb-4">💫</div>
+                        <h2 class="mb-3">Our Mission</h2>
+                        <p class="lead">To democratize knowledge sharing by providing a platform where experts, enthusiasts, and everyday heroes can share their insights and experiences, making valuable information accessible to all.</p>
+                        <div class="mt-4">
+                            <span class="badge bg-primary p-2 me-2">Inclusive</span>
+                            <span class="badge bg-success p-2 me-2">Authentic</span>
+                            <span class="badge bg-info p-2 me-2">Impactful</span>
+                            <span class="badge bg-warning p-2">Community-Driven</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-5" style="background: #f8f9ff;">
+        <div class="container py-5">
+            <h2 class="text-center mb-5">By The Numbers</h2>
+            <div class="row text-center">
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="p-4">
+                        <h1 class="display-4 fw-bold" style="color: var(--about-primary);">1,589</h1>
+                        <p class="mb-0">Published Articles</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="p-4">
+                        <h1 class="display-4 fw-bold" style="color: var(--about-primary);">324</h1>
+                        <p class="mb-0">Expert Contributors</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="p-4">
+                        <h1 class="display-4 fw-bold" style="color: var(--about-primary);">89K+</h1>
+                        <p class="mb-0">Monthly Readers</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="p-4">
+                        <h1 class="display-4 fw-bold" style="color: var(--about-primary);">42</h1>
+                        <p class="mb-0">Countries Reached</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+
+
+    <!-- Team Section -->
+    <section class="py-5" style="background: #f8f9ff;" id="team">
+        <div class="container py-5">
+            <h2 class="text-center mb-5">Meet Our Leadership Team</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="team-card">
+                        <img src="data:image/jpeg;base64,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" alt="CEO">
+                        <h4 class="mb-2">Jaskirat singh</h4>
+                        <h6 class="text-primary mb-3">CEO & Founder</h6>
+                        <p class="small text-muted">Former journalist with 15+ years experience in digital media and content strategy.</p>
+                        <div class="mt-3">
+                            <a href="#" class="text-decoration-none me-3"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" class="text-decoration-none"><i class="bi bi-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-5">
+        <div class="container py-5">
+            <h2 class="text-center mb-5">Our Core Values</h2>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="value-card">
+                        <div class="display-4 mb-3">🤝</div>
+                        <h5>Community First</h5>
+                        <p class="small text-muted">We prioritize our readers and writers, creating a supportive ecosystem for growth.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="value-card">
+                        <div class="display-4 mb-3">🎯</div>
+                        <h5>Quality Over Quantity</h5>
+                        <p class="small text-muted">Every article goes through rigorous review to ensure value and accuracy.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="value-card">
+                        <div class="display-4 mb-3">🌈</div>
+                        <h5>Diversity & Inclusion</h5>
+                        <p class="small text-muted">We amplify diverse voices and perspectives from around the world.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="value-card">
+                        <div class="display-4 mb-3">💡</div>
+                        <h5>Continuous Learning</h5>
+                        <p class="small text-muted">We believe in evolving with our community and embracing new ideas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-5" style="background: var(--about-gradient); color: white;">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="mb-3">Get In Touch</h2>
+                    <p class="mb-4">Have questions, suggestions, or want to contribute? We'd love to hear from you.</p>
+                    <div class="mb-3">
+                        <i class="bi bi-envelope me-3"></i>
+                        <span>contact@blogsphere.com</span>
+                    </div>
+                    <div class="mb-3">
+                        <i class="bi bi-telephone me-3"></i>
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+                    <div>
+                        <i class="bi bi-geo-alt me-3"></i>
+                        <span>123 Blog Street, Digital City</span>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                    <div class="contact-card">
+                        <h4 class="mb-3">Join Our Community</h4>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Your email address">
+                            <button class="btn btn-primary" type="button">Subscribe</button>
+                        </div>
+                        <p class="small text-muted">Subscribe to our newsletter for updates, writing opportunities, and community news.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h5 class="mb-3">BlogSphere</h5>
+                    <p class="text-white-50 small mb-0">Where stories connect, knowledge grows, and communities thrive.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="mb-3">
+                        <a href="/" class="text-white me-3">Home</a>
+                        <a href="/blogs/" class="text-white me-3">Blogs</a>
+                        <a href="#" class="text-white">Contact</a>
+                    </div>
+                    <small class="text-white-50">&copy; 2018-2025 BlogSphere. All rights reserved.</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
